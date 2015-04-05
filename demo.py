@@ -2,7 +2,6 @@ from socket import *
 from threading import *
 import time
 import _thread
-import sched
 
 def fun1(ipaddr, port1):
 	s1.bind((ipaddr, port1))
