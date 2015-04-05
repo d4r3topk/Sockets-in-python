@@ -32,7 +32,6 @@ if __name__ == '__main__':
 	except socket.error:
 		print("Failed to create socket.")
 	s1.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
-	m = _thread.allocate_lock()
 	t1 = MyThread(fun1, ipaddr, port)
 	t2 = MyThread(fun2, ipaddr, port)
 	t1.start()
