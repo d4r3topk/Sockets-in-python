@@ -6,26 +6,26 @@ from socket import *
 import sys
 
 def start_listen(ipaddr, port):
-	try:
+	try:							#Create a socket
 		s = socket(AF_INET, SOCK_STREAM)
 		s.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
 	except socket.error:
 		print("Failed to create socket.")
 	
-	s.bind((ipaddr, port))
+	s.bind((ipaddr, port))					#bind it to a ip address and port
 	print("Waiting for connection.")
-	s.listen(1)
-	client, addr = s.accept()
+	s.listen(1)						#Start listening for connections
+	client, addr = s.accept()				#accept the first connection found
 	print("Connected to IP address", str(addr[0]), "and port ", str(addr[1]))
 
 	while(True):
-		data = client.recv(1024).decode('utf8')  
-		if not data:
+		data = client.recv(1024).decode('utf8')  	#receive 1024 bytes of data from client
+		if not data:					#end if no more data received
 			print("Connection ended by client")
 			break
 		print("From client : ",data)
 	
-	client.close()
+	client.close()						#closing sockets
 	s.close()
 
 if __name__ == '__main__':
