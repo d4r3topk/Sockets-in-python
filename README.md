@@ -1,6 +1,8 @@
 # Sockets-in-python
 TCP proxy between sockets for communication between two clients.
 
+*This program needs python version 3 or above*
+
 Usage:
 
 First, run [python3 tcp_client_receive.py bind_ip bind_port]
