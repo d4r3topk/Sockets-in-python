@@ -16,7 +16,7 @@ def start_proxy(ipaddr, port):
 	client, addr = s.accept()			#connection found
 	print("applying proxy for ",addr)
 	time.sleep(1)
-	destip = client.recv(9).decode('utf8')		#receiving destination IP address from source client
+	destip = client.recv(16).decode('utf8')		#receiving destination IP address from source client
 	time.sleep(1)
 	destport = client.recv(4).decode('utf8')	#receiving destination port from source client
 	s1.connect((str(destip),int(destport)))		#connect to destination client through socket, s1
