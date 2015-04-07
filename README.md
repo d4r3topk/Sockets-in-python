@@ -11,3 +11,9 @@ Second, run python3 proxy.py proxy_ip proxy_port
 
 Third, run python3 tcp_client_send.py proxy_ip proxy_port dest_ip dest_port
 --> This will connect to the proxy script with "proxy_ip" ip address and port "proxy_port" and send the destip and destport to the proxy script which will then connect to that destination and forward the data.
+
+Example:
+1.) python3 tcp_client_receive.py 127.0.0.1 4040    -- destination client starts listening
+2.) python3 proxy.py 127.0.0.1 5050                 -- proxy started, starts listening
+3.) python3 tcp_client_send.py 127.0.0.1 5050 127.0.0.1 4040  -- uses first two arguments as proxy, and last two arguments as destination.
+(Anything sent from (3) will go to (2) and get forwarded to (1). So, At receiving client, the IP address and port is that of proxy.)
