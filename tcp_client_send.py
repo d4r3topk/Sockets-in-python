@@ -5,27 +5,27 @@ from socket import *
 import errno,sys
 
 def connect(proxyip,proxyport,ipaddr, port):
-	try:
+	try:							#Create socket
 		s = socket(AF_INET, SOCK_STREAM)
 		s.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
-		s.connect((proxyip, proxyport))
-	except ConnectionRefusedError:
-		print("There is no socket at port ",proxyport,".")
+		s.connect((proxyip, proxyport))			#Connect to the proxy
+	except ConnectionRefusedError:				#incase no socket at (proxyip,proxyport)
+		print("There is no socket at ipaddress ",proxyip," port ",proxyport,".")
 		sys.exit()
 	except socket.error:
 		print("Failed to create socket.")
 		sys.exit()
 	print("Proxy connected")
-	s.send(ipaddr.encode('utf8'))
-	s.send(port.encode('utf8'))
+	s.send(ipaddr.encode('utf8'))				#send destination IP address
+	s.send(port.encode('utf8'))				#send destination port number
 	while(True):
 		try:
 			message = input("Enter Message : ")
 			if(message!='exit'):
-				s.send(message.encode('utf8'))
+				s.send(message.encode('utf8'))	#send messages for destination
 			else:
 				break
-		except IOError as e:
+		except IOError as e:				#incase the pipe is broken(one client ends abruptly)
 			if e.errno == errno.EPIPE:
 				print("Connection ended")
 				break
