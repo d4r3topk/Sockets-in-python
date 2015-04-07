@@ -16,7 +16,9 @@ def connect(proxyip,proxyport,ipaddr, port):
 		print("Failed to create socket.")
 		sys.exit()
 	print("Proxy connected")
+	time.sleep(1)
 	s.send(ipaddr.encode('utf8'))				#send destination IP address
+	time.sleep(1)
 	s.send(port.encode('utf8'))				#send destination port number
 	while(True):
 		try:
