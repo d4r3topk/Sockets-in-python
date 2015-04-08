@@ -40,7 +40,8 @@ def connect(proxyip,proxyport,ipaddr, port):
 
 if __name__ == '__main__':
 	if(len(sys.argv)<5):
-		print("Usage : python3 tcp_client_send.py proxyip proxyport destip destport")
+		print("
+		       Usage : python3 tcp_client_send.py proxyip proxyport destip destport")
 		sys.exit()	
 	proxyip = str(sys.argv[1]) 
 	proxyport = int(sys.argv[2])
