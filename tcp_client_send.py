@@ -1,15 +1,18 @@
-#  This script is a TCP client script, which connects to a socket(server) 
-#  and sends data to it.
+'''
+	This script is a TCP client script, which connects to a socket(server) 
+	and sends data to it.
+'''
 
 from socket import *
 import errno,sys
 
 def connect(proxyip,proxyport,ipaddr, port):
-	try:							#Create socket
+	try:  #Create socket
 		s = socket(AF_INET, SOCK_STREAM)
 		s.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
-		s.connect((proxyip, proxyport))			#Connect to the proxy
-	except ConnectionRefusedError:				#incase no socket at (proxyip,proxyport)
+		s.connect((proxyip, proxyport))  #Connect to the proxy
+	#incase no socket at (proxyip,proxyport)
+	except ConnectionRefusedError:
 		print("There is no socket at ipaddress ",proxyip," port ",proxyport,".")
 		sys.exit()
 	except socket.error:
@@ -17,17 +20,18 @@ def connect(proxyip,proxyport,ipaddr, port):
 		sys.exit()
 	print("Proxy connected")
 	time.sleep(1)
-	s.send(ipaddr.encode('utf8'))				#send destination IP address
+	s.send(ipaddr.encode('utf8'))  #send destination IP address
 	time.sleep(1)
-	s.send(port.encode('utf8'))				#send destination port number
+	s.send(port.encode('utf8'))  #send destination port number
 	while(True):
 		try:
 			message = input("Enter Message : ")
 			if(message!='exit'):
-				s.send(message.encode('utf8'))	#send messages for destination
+				s.send(message.encode('utf8'))  #send messages for destination
 			else:
 				break
-		except IOError as e:				#incase the pipe is broken(one client ends abruptly)
+		#incase the pipe is broken(one client ends abruptly)
+		except IOError as e: 
 			if e.errno == errno.EPIPE:
 				print("Connection ended")
 				break
